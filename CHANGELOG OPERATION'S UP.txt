@@ -1,0 +1,77 @@
+2.5:
+reworked the freeplay disk system
+
+added color controls for the top and bottom half of the disc seperately
+
+copy and paste freeplay colors button works properly
+
+added more difficulties that can be toggled on or off
+
+put a mic'd up difficulty alphabet ref in images\menudifficulties
+
+2.4:
+added chart-type selector from mic'd up (freeplay only)
+
+put myself and engine contributors in credits
+
+added mouse support
+
+edited the flip notes modifier to flip the strumline notes
+
+edited game icon to mic'd up's
+
+added navigation sprite to freeplay
+
+holding the arrow keys in character editor rapidly moves characters
+
+holding ALT while pressing arrow keys in character editor moves the character camera
+
+2.3:
+fixed bug where having long lists of songs in freeplay would cripple performance
+
+edited week editor to resemble the actual story menu
+
+edited menu character to resemble the actual story menu
+
+added quality of life feature where if you hold an arrow key in the menu character editor. it repidly moves the sprite.
+
+freeplay menu color tweens now look identical to mic'd up's
+
+2.2.2:
+Fixed bug where freeplay text would break if song list was too big
+
+fixed bug where on resetting score the disc icon would appear at the top of screen for a moment.
+
+polished the freeplay editor
+
+added color control to the freeplay disc
+
+2.2.1:
+an option to bring back the old psych in-game UI
+
+you can now use icons without winning variants
+
+custom icons now load properly in freeplay
+
+2.2:
+more modifiers
+
+The Freeplay menu resembles mic'd up a lot more
+
+triple color capability with the freeplay week editor
+
+New icon system (Winning icons)
+
+2.1:
+modifiers menu
+
+audio settings menu
+
+note sustains now bop to the beat (can be turned off in settings)
+
+2.0:
+Moved from OS to psych 0.7
+
+Menus tweaked to look more accurate to how mic'd up would do it
+
+added a similar Discord presence to mic'd up's

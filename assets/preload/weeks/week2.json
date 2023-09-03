@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Spookeez", "spooky", [255, 166, 73], [255, 255, 255], [255, 166, 73], [255, 153, 51], [255, 255, 255]],
+		["South", "spooky", [255, 166, 73], [255, 255, 255], [255, 166, 73], [255, 153, 51], [255, 255, 255]],
+		["Monster", "monster", [255, 240, 145], [231, 189, 0], [255, 240, 145], [255, 255, 51], [255, 255, 51]]
+	],
+
+	"weekCharacters": [
+		"spooky",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "halloween",
+
+	"storyName": "Spooky Month",
+	"weekBefore": "week1",
+	"weekName": "Week 2",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Bopeebo", "dad", [61, 9, 195], [231, 83, 249], [61, 9, 195], [112, 39, 188], [112, 39, 188]],
+		["Fresh", "dad", [61, 9, 195], [231, 83, 249], [61, 9, 195], [112, 39, 188], [112, 39, 188]],
+		["Dad Battle", "dad", [61, 9, 195], [231, 83, 249] , [61, 9, 195], [112, 39, 188], [112, 39, 188]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "Daddy Dearest",
+	"weekBefore": "tutorial",
+	"weekName": "Week 1",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

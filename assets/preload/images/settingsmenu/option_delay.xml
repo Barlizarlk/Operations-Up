@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="option_delay.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="offset idle0000" x="0" y="0" width="384" height="216"/>
+	<SubTexture name="offset select0000" x="384" y="0" width="514" height="196"/>
+</TextureAtlas>

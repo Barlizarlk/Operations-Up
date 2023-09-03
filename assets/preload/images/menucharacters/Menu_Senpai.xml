@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Menu_Senpai.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="M Senpai Idle0000" x="0" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0001" x="0" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0002" x="836" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0003" x="836" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0004" x="1672" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0005" x="1672" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0006" x="2508" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0007" x="2508" y="0" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0008" x="0" y="713" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0009" x="0" y="713" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0010" x="0" y="713" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0011" x="0" y="713" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0012" x="0" y="713" width="836" height="713"/>
+	<SubTexture name="M Senpai Idle0013" x="0" y="0" width="836" height="713"/>
+</TextureAtlas>

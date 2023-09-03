@@ -1,0 +1,22 @@
+{
+	"songs": [
+		["Cocoa", "parents", [194, 0, 213], [5, 0, 145], [194, 0, 213], [112, 39, 188], [255, 51, 204]],
+		["Eggnog", "parents", [194, 0, 213], [5, 0, 145], [194, 0, 213], [112, 39, 188], [255, 51, 204]],
+		["Winter Horrorland", "monster", [255, 240, 145], [231, 189, 0], [255, 240, 145], [255, 255, 51], [255, 255, 51]]
+	],
+
+	"weekCharacters": [
+		"parents-christmas",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "christmas",
+
+	"storyName": "RED SNOW",
+	"weekBefore": "week4",
+	"weekName": "Week 5",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

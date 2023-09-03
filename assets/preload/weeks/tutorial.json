@@ -1,0 +1,20 @@
+{
+	"songs": [
+		["Tutorial", "gf", [43, 230, 255], [43, 255, 197], [43, 230, 255], [204, 81, 90], [204, 81, 90]]
+	],
+
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "",
+	"weekBefore": "tutorial",
+	"weekName": "Tutorial",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

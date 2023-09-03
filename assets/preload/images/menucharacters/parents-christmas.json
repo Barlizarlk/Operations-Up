@@ -1,0 +1,10 @@
+{
+	"idle_anim": "M Parents Idle",
+	"confirm_anim": "M Dad Idle",
+	"position": [
+		-320,
+		10
+	],
+	"scale": 0.5,
+	"image": "Menu_Parents"
+}
