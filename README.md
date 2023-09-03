@@ -5,16 +5,16 @@ balls - IceTom
 
 ## Installation:
 
-You will need to install [Haxe 4.2.5] (https://haxe.org/download/), any versions that are not 4.2.5 may cause compiler issues.
+You will need to install Haxe 4.2.5 (https://haxe.org/download/), any versions that are not 4.2.5 may cause compiler issues.
 
 i'll add a tutorial later for what you need to install.
-## REMIND ME ICETOM!
+REMIND ME ICETOM!
 
 To install LuaJIT run: haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit inside of your windows terminal. for optimal resoults. make sure your terminal is running as an administator
 
 Or if you don't want to use .lua scripts, delete the "LUA_ALLOWED" line on Project.xml
 
-## Ice Engine Credits
+## Operation's Up Credits
 * Barlizarlk - Main Dev
 * IceTom - Assistance Dev
 
