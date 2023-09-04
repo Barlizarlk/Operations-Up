@@ -78,10 +78,10 @@ class MainMenuState extends MusicBeatState
 		//bg.screenCenter();
 		//add(bg);
 
-        	bg = new FlxSprite(-80).loadGraphic(Paths.image('mBG_Main'));
+        	bg = new FlxSprite(-89).loadGraphic(Paths.image('mBG_Main'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.16;
-		bg.setGraphicSize(Std.int(bg.width * 1.225));
+		bg.setGraphicSize(Std.int(bg.width * 1.125));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
@@ -146,13 +146,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.updateHitbox();
 		}
 
-		FlxG.camera.follow(camFollow, null, 0);
+		FlxG.camera.follow(camFollow, null, camLerp);
 
 		FlxG.camera.zoom = 3;
 		side.alpha = 0;
-		FlxTween.tween(FlxG.camera, {zoom: 1}, 1.1, {ease: FlxEase.expoInOut});
-		FlxTween.tween(bg, {angle: 0}, 1, {ease: FlxEase.quartInOut});
-		FlxTween.tween(side, {alpha: 1}, 0.9, {ease: FlxEase.quartInOut});
+		FlxTween.tween(FlxG.camera, {zoom: 1}, 1.4, {ease: FlxEase.expoInOut});
+		FlxTween.tween(bg, {angle: 0}, 1.2, {ease: FlxEase.quartInOut});
+		FlxTween.tween(side, {alpha: 1}, 1, {ease: FlxEase.quartInOut});
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
@@ -258,17 +258,19 @@ class MainMenuState extends MusicBeatState
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
-						if (curSelected != spr.ID)
-						{
+
 						FlxTween.tween(FlxG.camera, {zoom: 5}, 0.8, {ease: FlxEase.expoIn});
 						FlxTween.tween(bg, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
 
-							FlxTween.tween(spr, {alpha: 0}, 0.4, {
-								ease: FlxEase.quadOut,
-								onComplete: function(twn:FlxTween)
-								{
-									spr.kill();
-								}
+						if (curSelected != spr.ID)
+						{
+
+						FlxTween.tween(spr, {x: -600}, 0.6, {
+							ease: FlxEase.backIn,
+							onComplete: function(twn:FlxTween)
+							{
+								spr.kill();
+							}
 							});
 						}
 						else
@@ -317,20 +319,31 @@ class MainMenuState extends MusicBeatState
 			#end
 		}
 
+		menuItems.forEach(function(spr:FlxSprite)
+		{
+			if (spr.ID == curSelected)
+			{
+				camFollow.y = FlxMath.lerp(camFollow.y, spr.getGraphicMidpoint().y, camLerp / (ClientPrefs.data.framerate / 60));
+				camFollow.x = spr.getGraphicMidpoint().x;
+			}
+		});
+
 		super.update(elapsed);
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			//spr.screenCenter(X);
 
-			spr.scale.set(FlxMath.lerp(spr.scale.x, 0.6, camLerp / (ClientPrefs.data.framerate / 60)), FlxMath.lerp(spr.scale.y, 0.6, 0.4 / (ClientPrefs.data.framerate / 60)));
-			spr.y = FlxMath.lerp(spr.y, -40 + (spr.ID * 175), 0.4 / (ClientPrefs.data.framerate / 60));
+			spr.scale.set(FlxMath.lerp(spr.scale.x, 0.7, camLerp / (ClientPrefs.data.framerate / 60)), FlxMath.lerp(spr.scale.y, 0.7, 0.4 / (ClientPrefs.data.framerate / 60)));
+			spr.y = FlxMath.lerp(spr.y, 0 + (spr.ID * 175), 0.4 / (ClientPrefs.data.framerate / 60));
 
 			if (spr.ID == curSelected)
 			{
-				spr.scale.set(FlxMath.lerp(spr.scale.x, 0.9, camLerp / (ClientPrefs.data.framerate / 60)), FlxMath.lerp(spr.scale.y, 0.9, 0.4 / (ClientPrefs.data.framerate / 60)));
-				spr.y = FlxMath.lerp(spr.y, -90 + (spr.ID * 175), 0.4 / (ClientPrefs.data.framerate / 60));
+				spr.scale.set(FlxMath.lerp(spr.scale.x, 1, camLerp / (ClientPrefs.data.framerate / 60)), FlxMath.lerp(spr.scale.y, 1, 0.4 / (ClientPrefs.data.framerate / 60)));
+				spr.y = FlxMath.lerp(spr.y, -50 + (spr.ID * 175), 0.4 / (ClientPrefs.data.framerate / 60));
 			}
+
+				spr.updateHitbox();
 
 		});
 	}
@@ -360,7 +373,8 @@ class MainMenuState extends MusicBeatState
 				if(menuItems.length > 4) {
 					add = menuItems.length * 8;
 				}
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
+				// camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
+
 				//spr.centerOffsets();
 			}
 		});

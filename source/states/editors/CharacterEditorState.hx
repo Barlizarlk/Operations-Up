@@ -1068,8 +1068,39 @@ class CharacterEditorState extends MusicBeatState
 	}
 
 			var rapidMove:Bool = false;
+
+    var pos = [[], []];
+    var posChar = [[], []];
 	override function update(elapsed:Float)
 	{
+
+        var pMouse = FlxG.mouse.getPositionInCameraView(camEditor);
+            if(FlxG.mouse.justPressedRight){pos = [[camFollow.x, camFollow.y],[pMouse.x, pMouse.y]];}
+            if(FlxG.mouse.pressedRight){camFollow.setPosition(pos[0][0] + ((pos[1][0] - pMouse.x) * 1.0), pos[0][1] + ((pos[1][1] - pMouse.y) * 1.0));}
+
+                if(FlxG.mouse.wheel != 0 && FlxG.camera.zoom > 0.1){FlxG.camera.zoom += (FlxG.mouse.wheel * 0.01);}
+
+		if(FlxG.mouse.overlaps(char)){
+                if(FlxG.mouse.justPressed){posChar = [[char.x, char.y],[pMouse.x, pMouse.y]];}
+		if(FlxG.mouse.pressed) {
+
+		char.positionArray[0] = (posChar[0][0] - ((posChar[1][0] - pMouse.x) * 1));
+		char.positionArray[1] = (posChar[0][1] - ((posChar[1][1] - pMouse.y) * 1));
+
+		positionXStepper.value = char.positionArray[0];
+		positionYStepper.value = char.positionArray[1];
+
+				updatePointerPos();
+				char.x = char.positionArray[0];
+				char.y = char.positionArray[1];
+		}
+	}
+
+		if(FlxG.mouse.justReleased) {
+				char.x = char.positionArray[0];
+				char.y = char.positionArray[1];
+				updatePointerPos();
+		}
 		MusicBeatState.camBeat = FlxG.camera;
 		if(char.animationsArray[curAnim] != null) {
 			textAnim.text = char.animationsArray[curAnim].anim;

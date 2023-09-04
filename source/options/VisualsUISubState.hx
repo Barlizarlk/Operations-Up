@@ -82,6 +82,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'psychHud',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Colored Health Bar',
+			'If unchecked, brings back the classic red and green health colors',
+			'coloredHealth',
+			'bool');
+		addOption(option);
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
