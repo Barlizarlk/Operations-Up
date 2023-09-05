@@ -1,6 +1,3 @@
-# joe biden bike fall
-balls - IceTom
-
 # Friday Night Funkin' - Operation's Up (Psych 0.7 and Mic'd up mix)
 
 ## Installation:
