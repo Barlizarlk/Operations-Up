@@ -144,6 +144,11 @@ class PlayState extends MusicBeatState
 	public var noteBeBigX:FlxTween;
 	public var noteGoSmallX:FlxTween;
 
+	public var rateSprY:FlxTween;
+	public var rateSprAngle:FlxTween;
+	public var rateSprX:FlxTween;
+	public var rateSprSize:FlxTween;
+
 	public var playbackRate(default, set):Float = 1;
 
 	public var boyfriendGroup:FlxSpriteGroup;
@@ -3111,13 +3116,12 @@ class PlayState extends MusicBeatState
 		rating.x += FlxG.random.int(-5, 5); // rate x init
 		rating.y += FlxG.random.int(-5, 5); // rate y init
 
-			FlxTween.tween(rating, {angle: 0}, 0.6 / playbackRate, {ease: FlxEase.sineOut});
+			rateSprAngle = FlxTween.tween(rating, {angle: 0}, 0.48 / playbackRate, {ease: FlxEase.sineOut}); // THIS BITCH CRASHES THE GAME!
 
-			FlxTween.tween(rating, {x: rating.x + FlxG.random.int(-10, 10)}, 0.7 / playbackRate, {ease: FlxEase.backOut});
-			FlxTween.tween(rating, {y: rating.y + FlxG.random.int(-10, 10)}, 0.7 / playbackRate, {ease: FlxEase.backOut});
+			rateSprX = FlxTween.tween(rating, {x: rating.x + FlxG.random.int(-10, 10)}, 0.6 / playbackRate, {ease: FlxEase.backOut});
+			rateSprY = FlxTween.tween(rating, {y: rating.y + FlxG.random.int(-10, 10)}, 0.6 / playbackRate, {ease: FlxEase.backOut});
 
-
-		FlxTween.tween(rating, {"scale.x": 0.1, "scale.y": 0.1}, 0.85 / playbackRate, {startDelay: 0.025 / playbackRate, ease: FlxEase.quartIn});
+		rateSprSize = FlxTween.tween(rating, {"scale.x": 0.1, "scale.y": 0.1}, 0.65 / playbackRate, {startDelay: Conductor.crochet * 0.000025 / playbackRate, ease: FlxEase.quartIn});
 
 		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.001 / playbackRate
@@ -3126,6 +3130,7 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(comboSpr, {alpha: 0}, 0.2 / playbackRate, {
 			onComplete: function(tween:FlxTween)
 			{
+
 				comboSpr.destroy();
 				rating.destroy();
 			},
@@ -3207,11 +3212,13 @@ class PlayState extends MusicBeatState
 			var spr:StrumNote = playerStrums.members[key];
 			if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
 			{
+				if (!PlayState.isPixelStage) {
 
 				if(noteBeBigY != null) noteBeBigY.cancel();
 				if(noteBeBigX != null) noteBeBigX.cancel();
-				noteGoSmallY = FlxTween.tween(spr, {"scale.y": 0.7}, 0.6, { ease: FlxEase.elasticOut});
-				noteGoSmallX = FlxTween.tween(spr, {"scale.x": 0.7}, 0.8, { ease: FlxEase.elasticOut});
+				noteGoSmallY = FlxTween.tween(spr, {"scale.y": 0.66}, 0.3, { ease: FlxEase.elasticOut});
+				noteGoSmallX = FlxTween.tween(spr, {"scale.x": 0.66}, 0.6, { ease: FlxEase.elasticOut});
+				}
 
 				spr.playAnim('pressed');
 				spr.resetAnim = 0;
@@ -3246,10 +3253,13 @@ class PlayState extends MusicBeatState
 			var spr:StrumNote = playerStrums.members[key];
 			if(spr != null)
 			{
+				if (!PlayState.isPixelStage) {
 				if(noteBeBigY != null) noteBeBigY.cancel();
 				if(noteBeBigX != null) noteBeBigX.cancel();
 				noteGoSmallY = FlxTween.tween(spr, {"scale.y": 0.7}, 0.6, { ease: FlxEase.elasticOut});
 				noteGoSmallX = FlxTween.tween(spr, {"scale.x": 0.7}, 0.8, { ease: FlxEase.elasticOut});
+				}
+				
 				spr.playAnim('static');
 				spr.resetAnim = 0;
 			}
@@ -3531,12 +3541,13 @@ class PlayState extends MusicBeatState
 			{
 				var spr = playerStrums.members[note.noteData];
 				if(spr != null) spr.playAnim('confirm', true);
-
+				if (!PlayState.isPixelStage) {
 				if (!note.isSustainNote) {
 				// if(noteGoSmallY != null) noteGoSmallY.cancel();
 				// if(noteGoSmallX != null) noteGoSmallX.cancel();
 				noteBeBigY = FlxTween.tween(spr, {"scale.y": 0.75}, 0.001);
 				noteBeBigX = FlxTween.tween(spr, {"scale.x": 0.75}, 0.001);
+					}
 				}
 			}
 			else strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.5 / 1000);

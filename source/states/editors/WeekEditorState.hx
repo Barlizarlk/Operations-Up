@@ -483,14 +483,16 @@ class WeekEditorState extends MusicBeatState
 
 				for (i in 0...splittedText.length) {
 					if(i >= weekFile.songs.length) { //Add new song
-						weekFile.songs.push([splittedText[i], 'dad', [146, 113, 253], [146, 113, 253], [146, 113, 253]]);
+						weekFile.songs.push([splittedText[i], 'dad', [61, 9, 195], [231, 83, 249], [61, 9, 195], [112, 39, 188], [112, 39, 188]]);
 					} else { //Edit song
 						weekFile.songs[i][0] = splittedText[i];
 						if(weekFile.songs[i][1] == null || weekFile.songs[i][1]) {
 							weekFile.songs[i][1] = 'dad';
-							weekFile.songs[i][2] = [146, 113, 253];
-							weekFile.songs[i][3] = [146, 113, 253];
-							weekFile.songs[i][4] = [146, 113, 253];
+							weekFile.songs[i][2] = [61, 9, 195];
+							weekFile.songs[i][3] = [231, 83, 249];
+							weekFile.songs[i][4] = [61, 9, 195];
+							weekFile.songs[i][5] = [112, 39, 188];
+							weekFile.songs[i][6] = [112, 39, 188];
 						}
 					}
 				}
