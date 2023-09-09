@@ -341,7 +341,10 @@ class StoryMenuState extends MusicBeatState
 			{
 				PlayState.storyPlaylist = songArray;
 		PlayState.isStoryMode = true;
+		PlayState.isEndless = false;
+		PlayState.isMarathon = false;
 		PlayState.isFreeplay = false;
+		PlayState.isSurvival = false;
 				selectedWeek = true;
 	
 				var diffic = Difficulty.getFilePath(curDifficulty);

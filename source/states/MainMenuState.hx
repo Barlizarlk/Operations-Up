@@ -102,6 +102,7 @@ class MainMenuState extends MusicBeatState
 		var side:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('Main_Side'));
 		side.scrollFactor.x = 0;
 		side.scrollFactor.y = 0;
+		side.x += -20;
 		side.antialiasing = true;
 		add(side);
 
@@ -137,7 +138,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 180) - 30}, 1.3, {ease: FlxEase.expoInOut});
+			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 180) - 30}, 1.5, {ease: FlxEase.expoInOut});
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -240,6 +241,9 @@ class MainMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				DiscordClient.changePresence("Back to the Title Screen.", null);
 				MusicBeatState.switchState(new TitleState());
+
+						FlxTween.tween(FlxG.camera, {zoom: 3}, 0.6, {ease: FlxEase.expoIn});
+						FlxTween.tween(bg, {angle: 35}, 0.6, {ease: FlxEase.expoIn});
 			}
 
 			if (controls.ACCEPT || FlxG.mouse.justPressed)

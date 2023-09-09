@@ -88,6 +88,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			'coloredHealth',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Show Watermark',
+			'If unchecked, The watermark goes away',
+			'showWatermark',
+			'bool');
+		addOption(option);
+		option.onChange = onChangeWatermark;
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
@@ -233,6 +240,14 @@ class VisualsUISubState extends BaseOptionsMenu
 	{
 		if(Main.fpsVar != null)
 			Main.fpsVar.visible = ClientPrefs.data.showFPS;
+	}
+	#end
+
+	#if !mobile
+	function onChangeWatermark()
+	{
+		if(Main.watermark != null)
+			Main.watermark.visible = ClientPrefs.data.showWatermark;
 	}
 	#end
 }

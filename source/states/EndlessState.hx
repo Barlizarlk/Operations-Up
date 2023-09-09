@@ -75,7 +75,10 @@ class EndlessState extends MusicBeatState
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
+		PlayState.isEndless = true;
+		PlayState.isMarathon = false;
 		PlayState.isFreeplay = false;
+		PlayState.isSurvival = false;
 		WeekData.reloadWeekFiles(false);
 
 		#if desktop
@@ -534,7 +537,10 @@ class EndlessState extends MusicBeatState
 			{
 				PlayState.SONG = Song.loadFromJson(poop, songLowercase);
 		PlayState.isStoryMode = false;
+		PlayState.isEndless = true;
+		PlayState.isMarathon = false;
 		PlayState.isFreeplay = false;
+		PlayState.isSurvival = false;
 				PlayState.storyDifficulty = curDifficulty;
 
 				trace('CURRENT WEEK: ' + WeekData.getWeekFileName());

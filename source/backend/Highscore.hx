@@ -4,6 +4,7 @@ class Highscore
 {
 	public static var weekScores:Map<String, Int> = new Map();
 	public static var songScores:Map<String, Int> = new Map<String, Int>();
+	public static var endlessScores:Map<String, Int> = new Map<String, Int>();
 	public static var songRating:Map<String, Float> = new Map<String, Float>();
 
 	public static function resetSong(song:String, diff:Int = 0):Void
@@ -48,6 +49,38 @@ class Highscore
 			setWeekScore(daWeek, score);
 	}
 
+	public static function saveMarathonScore(score:Int = 0):Void
+	{
+		if (score > FlxG.save.data.marathonScore || FlxG.save.data.marathonScore == null)
+		{
+			FlxG.save.data.marathonScore = score;
+			FlxG.save.flush();
+		}
+	}
+
+	public static function saveEndlessScore(song:String, score:Int = 0):Void
+	{
+		var daSong:String = song;
+
+		if (endlessScores.exists(daSong))
+		{
+			if (endlessScores.get(daSong) < score)
+				setEndless(daSong, score);
+		}
+		else
+			setEndless(daSong, score);
+	}
+
+	public static function saveSurvivalScore(score:Int = 0, timeLeft:Float = 0):Void
+		{
+			if (score > FlxG.save.data.survivalScore || FlxG.save.data.survivalScore == null)
+			{
+				FlxG.save.data.survivalScore = score;
+				FlxG.save.data.survivalTime = timeLeft;
+				FlxG.save.flush();
+			}
+		}
+
 	/**
 	 * YOU SHOULD FORMAT SONG WITH formatSong() BEFORE TOSSING IN SONG VARIABLE
 	 */
@@ -63,6 +96,14 @@ class Highscore
 		// Reminder that I don't need to format this song, it should come formatted!
 		weekScores.set(week, score);
 		FlxG.save.data.weekScores = weekScores;
+		FlxG.save.flush();
+	}
+
+	static function setEndless(song:String, score:Int):Void
+	{
+		// Reminder that I don't need to format this song, it should come formatted!
+		endlessScores.set(song, score);
+		FlxG.save.data.endlessScores = endlessScores;
 		FlxG.save.flush();
 	}
 
@@ -88,6 +129,14 @@ class Highscore
 		return songScores.get(daSong);
 	}
 
+	public static function getEndless(song:String):Int
+	{
+		if (!endlessScores.exists(song))
+			setEndless((song), 0);
+
+		return endlessScores.get(song);
+	}
+
 	public static function getRating(song:String, diff:Int):Float
 	{
 		var daSong:String = formatSong(song, diff);
@@ -111,6 +160,10 @@ class Highscore
 		if (FlxG.save.data.weekScores != null)
 		{
 			weekScores = FlxG.save.data.weekScores;
+		}
+		if (FlxG.save.data.endlessScores != null)
+		{
+			endlessScores = FlxG.save.data.endlessScores;
 		}
 		if (FlxG.save.data.songScores != null)
 		{

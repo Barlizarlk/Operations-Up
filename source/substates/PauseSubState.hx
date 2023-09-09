@@ -11,6 +11,9 @@ import flixel.util.FlxStringUtil;
 import states.StoryMenuState;
 import states.FreeplayState;
 import states.EndlessState;
+import states.MenuMarathon;
+import states.MenuSurvival;
+import states.PlaySelection;
 import options.OptionsState;
 
 class PauseSubState extends MusicBeatSubstate
@@ -308,9 +311,21 @@ class PauseSubState extends MusicBeatSubstate
 					{
 						MusicBeatState.switchState(new FreeplayState());
 					}
-					else
+					else if(PlayState.isEndless)
 					{
 						MusicBeatState.switchState(new EndlessState());
+					}
+					else if(PlayState.isMarathon)
+					{
+						MusicBeatState.switchState(new MenuMarathon());
+					}
+					else if(PlayState.isSurvival)
+					{
+						MusicBeatState.switchState(new MenuSurvival());
+					}
+					else
+					{
+						MusicBeatState.switchState(new PlaySelection());
 					}
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));

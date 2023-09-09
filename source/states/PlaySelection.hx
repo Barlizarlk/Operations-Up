@@ -199,13 +199,13 @@ class PlaySelection extends MusicBeatState
 									FlxG.switchState(new NotAvalibleState());
 									DiscordClient.changePresence("Time to spice the game.",  null);
 								case 'marathon':
-									FlxG.switchState(new NotAvalibleState());
+									FlxG.switchState(new MenuMarathon());
 									DiscordClient.changePresence("I wanna make a marathon.",  null);
 								case 'survival':
-									FlxG.switchState(new NotAvalibleState());
+									FlxG.switchState(new MenuSurvival());
 									DiscordClient.changePresence("This feels like Total Drama Island already.",  null);
 								case 'endless':
-										MusicBeatState.switchState(new JankAssMenuState());
+										MusicBeatState.switchState(new EndlessState());
 									DiscordClient.changePresence("Endless easy SMM2 moment.",  null);
 
 							}

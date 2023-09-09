@@ -12,6 +12,7 @@ class SaveVariables {
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
+	public var showWatermark:Bool = true;
 	public var flashing:Bool = true;
 	public var psychHud:Bool = false;
 	public var coloredHealth:Bool = true;
@@ -51,6 +52,9 @@ class SaveVariables {
 	public var vocalsVolume:Int = 100;
     	public var menuMusic:Bool = true;
     	public var muteVocalsOnMiss:Bool = true;
+
+    	public var hue:Int = 0;
+    	public var gameBrightness:Int = 0;
 
     	public var SingleDigits:Bool = false;
     	public var Perfect:Bool = false;

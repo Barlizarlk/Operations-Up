@@ -5,7 +5,9 @@ import flixel.graphics.FlxGraphic;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
+import shaders.ColorSwap;
 import openfl.Lib;
+import openfl.display.Bitmap;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
@@ -38,6 +40,7 @@ class Main extends Sprite
 	public static var fpsVar:FPS;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
+	public static var watermark:Sprite;
 
 	public static function main():Void
 	{
@@ -86,6 +89,17 @@ class Main extends Sprite
 		Controls.instance = new Controls();
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+
+		var bitmapData = Assets.getBitmapData("assets/images/watermark.png");
+
+		watermark = new Sprite();
+		watermark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+		watermark.alpha = 0.4;
+		watermark.x = Lib.application.window.width - 10 - watermark.width;
+		watermark.y = Lib.application.window.height - 10 - watermark.height;
+		addChild(watermark);
+
+		watermark.visible = ClientPrefs.data.showWatermark;
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
