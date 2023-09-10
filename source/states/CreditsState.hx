@@ -72,10 +72,11 @@ class CreditsState extends MusicBeatState
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			["Operation's up Creator"],
 			['barlizark', 'bar', 'created the engine "Third time troubleshooting the same problem, KILL ME NOW!"', 'https://www.youtube.com/channel/UCfiTpCk8BuY__IpMckKrt-g', 'D43B0C'],
+			['IceTom', 'tomska', 'additional programmer', 'https://www.youtube.com/channel/UC_2h5mOIQMis_6BXaKd_PzQ', 'FFFFFF'],
 			[''],
 
 			['Special Thanks'],
-			['DriftDaKiller', 'drift', 'Playtested beta 2.4 of the engine, "me when the"', 'https://www.youtube.com/channel/UCjNRYGy5brZ7olFK1NzDFFA', '038cfc'],
+			['DriftDaKiller', 'drift', 'Playtester of the engine, "me when the"', 'https://www.youtube.com/channel/UCjNRYGy5brZ7olFK1NzDFFA', '038cfc'],
 			['Verwex', 'verwex', "Created Mic'd up, The engine that Operation's up is based off of", 'https://github.com/Verwex', 'A3DBFF'],
 			[''],
 

@@ -11,6 +11,7 @@ import flixel.util.FlxStringUtil;
 import states.StoryMenuState;
 import states.FreeplayState;
 import states.EndlessState;
+import states.MenuEndless;
 import states.MenuMarathon;
 import states.MenuSurvival;
 import states.PlaySelection;
@@ -313,7 +314,7 @@ class PauseSubState extends MusicBeatSubstate
 					}
 					else if(PlayState.isEndless)
 					{
-						MusicBeatState.switchState(new EndlessState());
+						MusicBeatState.switchState(new MenuEndless());
 					}
 					else if(PlayState.isMarathon)
 					{

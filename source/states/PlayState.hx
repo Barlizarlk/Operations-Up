@@ -41,11 +41,13 @@ import cutscenes.DialogueBoxPsych;
 import states.StoryMenuState;
 import states.FreeplayState;
 import states.EndlessState;
+import states.MenuEndless;
 import states.MenuMarathon;
 import states.MenuSurvival;
 import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
 import substates.Survival_GameOptions._survivalVars;
+import substates.Endless_Substate._endless;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
@@ -109,6 +111,9 @@ class PlayState extends MusicBeatState
 
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
+
+	public static var loops:Int = 0;
+	public static var speed:Float = 0;
 
 	public var boyfriendMap:Map<String, Character> = new Map<String, Character>();
 	public var dadMap:Map<String, Character> = new Map<String, Character>();
@@ -1601,14 +1606,27 @@ class PlayState extends MusicBeatState
 	private function generateSong(dataPath:String):Void
 	{
 		// FlxG.log.add(ChartParser.parse());
-		songSpeed = PlayState.SONG.speed;
+
+		if (isEndless)
+			SONG.speed = _endless.speed;
+		else
+			songSpeed = PlayState.SONG.speed;
+
+
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype');
 		switch(songSpeedType)
 		{
 			case "multiplicative":
-				songSpeed = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed');
+			if (isEndless)
+			songSpeed = SONG.speed * _endless.speed;
+			else
+			songSpeed = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed');
+
 			case "constant":
-				songSpeed = ClientPrefs.getGameplaySetting('scrollspeed');
+			if (isEndless)
+			songSpeed = _endless.speed;
+			else
+			songSpeed = ClientPrefs.getGameplaySetting('scrollspeed');
 		}
 
 		var songData = SONG;
@@ -2986,6 +3004,12 @@ class PlayState extends MusicBeatState
 			}
 			else if (isEndless)
 			{
+
+				loops++;
+
+				if (speed < 8 && _endless.ramp)
+					speed = SONG.speed + 0.15;
+
 					var difficulty:String = Difficulty.getFilePath();
 
 					trace('LOADING NEXT SONG');
@@ -2995,7 +3019,30 @@ class PlayState extends MusicBeatState
 					FlxTransitionableState.skipNextTransOut = true;
 					prevCamFollow = camFollow;
 
-					PlayState.SONG = Song.loadFromJson(SONG.song + difficulty, SONG.song);
+				if (storyDifficulty < 5 && loops % 8 == 0 && loops > 0 && _endless.ramp)
+				{
+					storyDifficulty++;
+
+					var diffic:String = "";
+
+					switch (storyDifficulty)
+					{
+						case 0:
+							diffic = '-noob';
+						case 1:
+							diffic = '-easy';
+						case 3:
+							diffic = '-hard';
+						case 4:
+							diffic = '-expert';
+						case 5:
+							diffic = '-insane';
+					}
+
+					PlayState.SONG = Song.loadFromJson(SONG.song + diffic, SONG.song);
+				}
+
+					// PlayState.SONG = Song.loadFromJson(SONG.song + difficulty, SONG.song);
 					FlxG.sound.music.stop();
 
 					cancelMusicFadeTween();
@@ -3608,6 +3655,14 @@ class PlayState extends MusicBeatState
 
 		}
 		combo = 0;
+
+									if (isSurvival)
+									{
+										survivalTimer -= 500 * MenuModifiers.fakeMP * _survivalVars.subtractTimeMultiplier;
+
+										FlxTween.color(survivalCountdown, 0.2, FlxColor.RED, FlxColor.WHITE, {ease: FlxEase.quadInOut
+										});
+									}
 
 		if(!practiceMode) songScore -= 10;
 		if(!endingSong) songMisses++;

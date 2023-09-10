@@ -9,6 +9,10 @@ import flixel.math.FlxPoint;
 
 import states.StoryMenuState;
 import states.FreeplayState;
+import states.EndlessState;
+import states.MenuMarathon;
+import states.MenuSurvival;
+import states.PlaySelection;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -97,10 +101,29 @@ class GameOverSubstate extends MusicBeatSubstate
 			PlayState.chartingMode = false;
 
 			Mods.loadTopMod();
-			if (PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
-			else
-				MusicBeatState.switchState(new FreeplayState());
+					if(PlayState.isStoryMode) {
+						MusicBeatState.switchState(new StoryMenuState());
+					} 
+					else if(PlayState.isFreeplay)
+					{
+						MusicBeatState.switchState(new FreeplayState());
+					}
+					else if(PlayState.isEndless)
+					{
+						MusicBeatState.switchState(new EndlessState());
+					}
+					else if(PlayState.isMarathon)
+					{
+						MusicBeatState.switchState(new MenuMarathon());
+					}
+					else if(PlayState.isSurvival)
+					{
+						MusicBeatState.switchState(new MenuSurvival());
+					}
+					else
+					{
+						MusicBeatState.switchState(new PlaySelection());
+					}
 
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			PlayState.instance.callOnScripts('onGameOverConfirm', [false]);

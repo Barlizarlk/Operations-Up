@@ -36,6 +36,7 @@ class Endless_Substate extends MusicBeatSubstate
 
     public static var curSelected:Int = 0;
     public static var curDifficulty:Int = 2;
+	private static var lastDifficultyName:String = Difficulty.getDefault();
 
     public static var _endless:EndlessVars;
 

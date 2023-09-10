@@ -205,7 +205,7 @@ class PlaySelection extends MusicBeatState
 									FlxG.switchState(new MenuSurvival());
 									DiscordClient.changePresence("This feels like Total Drama Island already.",  null);
 								case 'endless':
-										MusicBeatState.switchState(new EndlessState());
+										MusicBeatState.switchState(new MenuEndless());
 									DiscordClient.changePresence("Endless easy SMM2 moment.",  null);
 
 							}
