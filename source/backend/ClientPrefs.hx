@@ -23,6 +23,19 @@ class SaveVariables {
 	public var splashAlpha:Float = 0.6;
 	public var scoreMulti:Float = 1;
 
+    	public var iconZoom:Float = 1;
+	public var cameraZoom:Float = 1;
+	public var cameraSpeed:Float = 1;
+	public var bgAlpha:Float = 1;
+	public var enemyAlpha:Float = 1;
+	public var pauseCountdown:Bool = false;
+	public var noteSplashesVisible:Bool = true;
+	public var noteGlow:Bool = true;
+	public var eNoteGlow:Bool = true;
+	public var missAnims:Bool = true;
+	public var hpIcons:Bool = true;
+	public var hpAnims:Bool = true;
+
 	public var mustDie:Float = 0;
 	public var wideNotes:Float = 0;
 	public var tallNotes:Float = 0;

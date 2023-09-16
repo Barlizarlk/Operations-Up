@@ -71,6 +71,60 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 
+		var option:Option = new Option('Note Splashes',
+			'Turn on note splashes when you hit notes really good.',
+			'noteSplashesVisible',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Camera Speed',
+			"Change how fast should the camera go to follow a character. The more, the faster camera goes.",
+			'cameraSpeed',
+			'float');
+		addOption(option);
+		option.changeValue = 0.1;
+		option.minValue = 0.1;
+		option.maxValue = 4;
+
+		var option:Option = new Option('Camera Zoom',
+			"Change how zoomed in the camera becomes after a beat. The more, the bigger zoom.",
+			'cameraZoom',
+			'float');
+		addOption(option);
+		option.changeValue = 0.1;
+		option.minValue = 0.1;
+		option.maxValue = 4;
+
+		var option:Option = new Option('Note Glow',
+			"Make notes glow whenever you hit notes correctly.",
+			'noteGlow',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Enemy Note Glow',
+			"Make enemy's notes glow whenever they hit notes.",
+			'eNoteGlow',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Miss Animations',
+			"Play miss animation for the player if they miss a note?",
+			'missAnims',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Health Icons',
+			"Show the little health icons of people?",
+			'hpIcons',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Health Icon Animations',
+			"Play winning and losing animations for icons when HP is low or high?",
+			'hpAnims',
+			'bool');
+		addOption(option);
+
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
 			'hideHud',

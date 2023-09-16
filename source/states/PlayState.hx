@@ -154,6 +154,10 @@ class PlayState extends MusicBeatState
 	public var noteGoSmallTwoY:FlxTween;
 	public var noteGoSmallTwoX:FlxTween;
 
+	var miscLerp:Float = 0.09;
+	var camLerp:Float = 0.14;
+	var zoomLerp:Float = 0.09;
+
 	public var rateSprY:FlxTween;
 	public var rateSprAngle:FlxTween;
 	public var rateSprX:FlxTween;
@@ -695,14 +699,30 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
+
+		if (ClientPrefs.data.psychHud)
 		iconP1.y = healthBar.y - 75;
-		iconP1.visible = !ClientPrefs.data.hideHud;
+		else
+		iconP1.y = healthBar.y - (iconP1.height / 2);
+
+		if (!ClientPrefs.data.hideHud && ClientPrefs.data.hpIcons)
+		iconP1.visible = true;
+		else
+		iconP1.visible = false;
 		iconP1.alpha = ClientPrefs.data.healthBarAlpha;
 		add(iconP1);
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
+
+		if (ClientPrefs.data.psychHud)
 		iconP2.y = healthBar.y - 75;
-		iconP2.visible = !ClientPrefs.data.hideHud;
+		else
+		iconP2.y = healthBar.y - (iconP2.height / 2);
+
+		if (!ClientPrefs.data.hideHud && ClientPrefs.data.hpIcons)
+		iconP2.visible = true;
+		else
+		iconP2.visible = false;
 		iconP2.alpha = ClientPrefs.data.healthBarAlpha;
 		add(iconP2);
 
@@ -2104,7 +2124,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.camera.followLerp = 0;
 		if(!inCutscene && !paused) {
-			FlxG.camera.followLerp = FlxMath.bound(elapsed * 2.4 * cameraSpeed * playbackRate / (FlxG.updateFramerate / 60), 0, 1);
+			FlxG.camera.followLerp = FlxMath.bound(elapsed * 2.4 * cameraSpeed * ClientPrefs.data.cameraSpeed * playbackRate / (FlxG.updateFramerate / 60), 0, 1);
 			if(!startingSong && !endingSong && boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name.startsWith('idle')) {
 				boyfriendIdleTime += elapsed;
 				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
@@ -2225,6 +2245,8 @@ class PlayState extends MusicBeatState
 		// iconP1.animation.curAnim.curFrame = (healthBar.percent > 80) ? 2 : 0;
 
 
+		if (ClientPrefs.data.hpAnims) {
+
 		if (iconP1.animation.frames == 3) {
 			if (healthBar.percent < 20)
 				iconP1.animation.curAnim.curFrame = 1;
@@ -2252,7 +2274,7 @@ class PlayState extends MusicBeatState
 			else 
 				iconP2.animation.curAnim.curFrame = 0;
 		}
-
+}
 
 
 
@@ -2825,15 +2847,19 @@ class PlayState extends MusicBeatState
 		if(isDad)
 		{
 			camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
-			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
+			// camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
+			// camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
+			FlxMath.lerp(camFollow.x, dad.cameraPosition[0] + opponentCameraOffset[0], (camLerp * ClientPrefs.data.cameraSpeed) / (ClientPrefs.data.framerate));
+			FlxMath.lerp(camFollow.y, dad.cameraPosition[1] + opponentCameraOffset[1], (camLerp * ClientPrefs.data.cameraSpeed) / (ClientPrefs.data.framerate));
 			tweenCamIn();
 		}
 		else
 		{
 			camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
-			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
+			// camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
+			// camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
+			FlxMath.lerp(camFollow.x, boyfriend.cameraPosition[0] + boyfriendCameraOffset[0], (camLerp * ClientPrefs.data.cameraSpeed) / (ClientPrefs.data.framerate));
+			FlxMath.lerp(camFollow.y, boyfriend.cameraPosition[1] + boyfriendCameraOffset[1], (camLerp * ClientPrefs.data.cameraSpeed) / (ClientPrefs.data.framerate));
 
 			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
 			{
@@ -3239,7 +3265,7 @@ class PlayState extends MusicBeatState
 		note.rating = daRating.name;
 		score = daRating.score;
 
-		if(daRating.noteSplash && !note.noteSplashData.disabled)
+		if(daRating.noteSplash && !note.noteSplashData.disabled && ClientPrefs.data.noteSplashesVisible)
 			spawnNoteSplashOnNote(note);
 
 		if(!practiceMode && !cpuControlled) {
@@ -3476,7 +3502,7 @@ class PlayState extends MusicBeatState
 			}
 
 			var spr:StrumNote = playerStrums.members[key];
-			if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
+			if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm' && ClientPrefs.data.noteGlow)
 			{
 				if (!PlayState.isPixelStage) {
 
@@ -3673,7 +3699,7 @@ class PlayState extends MusicBeatState
 		var char:Character = boyfriend;
 		if((note != null && note.gfNote) || (SONG.notes[curSection] != null && SONG.notes[curSection].gfSection)) char = gf;
 		
-		if(char != null && char.hasMissAnimations)
+		if(char != null && char.hasMissAnimations && ClientPrefs.data.missAnims)
 		{
 			var suffix:String = '';
 			if(note != null) suffix = note.animSuffix;
@@ -3824,7 +3850,7 @@ class PlayState extends MusicBeatState
 			if(!cpuControlled)
 			{
 				var spr = playerStrums.members[note.noteData];
-				if(spr != null) spr.playAnim('confirm', true);
+				if(spr != null && ClientPrefs.data.noteGlow) spr.playAnim('confirm', true);
 				if (!PlayState.isPixelStage) {
 				if (!note.isSustainNote) {
 				// if(noteGoSmallY != null) noteGoSmallY.cancel();
@@ -3950,8 +3976,11 @@ class PlayState extends MusicBeatState
 		if (generatedMusic)
 			notes.sort(FlxSort.byY, ClientPrefs.data.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
 
-		iconP1.scale.set(1.2, 1.2);
-		iconP2.scale.set(1.2, 1.2);
+		// iconP1.scale.set(1.2, 1.2);
+		// iconP2.scale.set(1.2, 1.2);
+
+		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
+		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
@@ -3983,10 +4012,10 @@ class PlayState extends MusicBeatState
 
 			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.data.camZooms)
 			{
-				FlxG.camera.zoom += 0.015 * camZoomingMult;
-				camHUD.zoom += 0.03 * camZoomingMult;
-				camSus.zoom += 0.03 * camZoomingMult;
-				camNOTES.zoom += 0.03 * camZoomingMult;
+				FlxG.camera.zoom += 0.015 * camZoomingMult * ClientPrefs.data.cameraZoom;
+				camHUD.zoom += 0.03 * camZoomingMult * ClientPrefs.data.cameraZoom;
+				camSus.zoom += 0.03 * camZoomingMult * ClientPrefs.data.cameraZoom;
+				camNOTES.zoom += 0.03 * camZoomingMult * ClientPrefs.data.cameraZoom;
 			}
 
 			if (SONG.notes[curSection].changeBPM)
@@ -4202,7 +4231,7 @@ class PlayState extends MusicBeatState
 			spr = playerStrums.members[id];
 		}
 
-		if(spr != null) {
+		if(spr != null && ClientPrefs.data.eNoteGlow) {
 			spr.playAnim('confirm', true);
 			spr.resetAnim = time;
 		}

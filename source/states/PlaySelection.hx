@@ -20,6 +20,8 @@ class PlaySelection extends MusicBeatState
 {
 	public static var curSelected:Int = 0;
 
+	private var camGame:FlxCamera;
+
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	var optionShit:Array<String> = ['week', 'freeplay', 'marathon', 'endless', 'survival', 'modifier'];
@@ -34,6 +36,10 @@ class PlaySelection extends MusicBeatState
 
 	override function create()
 	{
+		camGame = new FlxCamera();
+		FlxG.cameras.reset(camGame);
+		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
 
@@ -156,8 +162,7 @@ class PlaySelection extends MusicBeatState
 				FlxTween.tween(bg, { y: 0-bg.height}, 0.4, { ease: FlxEase.expoIn });
 				FlxTween.tween(side, { alpha:0}, 0.4, { ease: FlxEase.quartInOut});
 				FlxTween.tween(checker, { alpha:0}, 0.4, { ease: FlxEase.quartInOut});
-
-				FlxG.switchState(new MainMenuState());
+				MusicBeatState.switchState(new MainMenuState());
 			}
 
 			if (controls.ACCEPT || FlxG.mouse.justPressed)
@@ -199,10 +204,10 @@ class PlaySelection extends MusicBeatState
 									FlxG.switchState(new NotAvalibleState());
 									DiscordClient.changePresence("Time to spice the game.",  null);
 								case 'marathon':
-									FlxG.switchState(new MenuMarathon());
+										MusicBeatState.switchState(new MenuMarathon());
 									DiscordClient.changePresence("I wanna make a marathon.",  null);
 								case 'survival':
-									FlxG.switchState(new MenuSurvival());
+										MusicBeatState.switchState(new MenuSurvival());
 									DiscordClient.changePresence("This feels like Total Drama Island already.",  null);
 								case 'endless':
 										MusicBeatState.switchState(new MenuEndless());

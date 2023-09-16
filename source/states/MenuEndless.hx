@@ -193,7 +193,7 @@ class MenuEndless extends MusicBeatState
 
 			if (back)
 			{
-				FlxG.switchState(new PlaySelection());
+				MusicBeatState.switchState(new PlaySelection());
 				goingBack = true;
 				FlxTween.tween(FlxG.camera, {zoom: 0.6, alpha: -0.6}, 0.7, {ease: FlxEase.quartInOut});
 				FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
